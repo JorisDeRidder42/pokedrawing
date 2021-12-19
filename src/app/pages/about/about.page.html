@@ -1,9 +1,27 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>about</ion-title>
+    <ion-title>Pokédraw</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
-
+<ion-content [fullscreen]="true">
+  <div class="ion-text-center">
+    <h1>Pokémon drawing app</h1>
+    <h6>Version 1.0.0</h6>
+    <ion-card>
+      <img src="assets/img/joris&moppie.jpg"/>
+      <ion-card-header>
+        <ion-card-title>Joris De Ridder</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+       I'm a student programming and made this app for my school project. I am a big pokémon fan and love to draw sometimes.
+      </ion-card-content>
+      <ion-card-content>
+        <p>Credits</p>
+        Alot of thanks to Josh Morony for his awesome tutorials. The core functionallity is based on one of his posts. 
+        And of course many thanks to the ionic team for making such an awesome framework.<br/>
+        This app is build on <ion-icon name="logo-ionic"></ion-icon> ionic
+       </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
+
