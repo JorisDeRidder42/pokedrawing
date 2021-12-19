@@ -1,12 +1,29 @@
-<ion-buttons left>
-  <button
-    *ngFor="let color of colors" (click)="changeColor(color)"
-  >
-    <ion-icon [style.color]="colour" name="brush"></ion-icon>
-  </button>
-</ion-buttons>
-<ion-content [fullscreen]="true" scroll-y="false">
-  <!-- <ion-col *ngFor="let color of colors" [style.background]="color" tappable (click)="selectColor(color)"></ion-col> -->
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Ionic Canvas Drawing
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content scroll-y="false">
+ 
+  <ion-range min="1" max="100" color="color" [(ngModel)]="brushSize">
+    <ion-icon size="small" slot="start" name="brush"></ion-icon>
+    <ion-icon slot="end" name="brush"></ion-icon>
+  </ion-range>
+  <ion-row>
+    <ion-col *ngFor="let color of colors" [style.background]="color" class="color-block" tappable
+      (click)="selectColor(color)"></ion-col>
+  </ion-row>
+  <ion-radio-group [(ngModel)]="selectedColor">
+    <ion-row>
+      <ion-col *ngFor="let color of colors" class="ion-text-center">
+          <ion-radio [value]="color"></ion-radio>
+      </ion-col>
+    </ion-row>
+  </ion-radio-group>
+ 
     <canvas #myCanvas
       (touchstart)="startDrawing($event)" (touchmove)="handleMoved($event)" (touchend)="endDrawing()"
       (mousedown)="startDrawing($event)" (mousemove)="moved($event)" (mouseup)="endDrawing()">

@@ -17,7 +17,7 @@ export class DrawPage implements AfterViewInit{
   PositionY: number;
   //public photos: any;
   //base64Image: any;
-  currentColor: string;
+  selectedColor: string = '#459cde';
   colors = [ '#9e2956', '#c2281d', '#de722f', '#edbf4c', '#5db37e', '#459cde', '#4250ad', '#802fa3' ];
   drawing = false;
   lineWidth: number = 10;
@@ -31,6 +31,8 @@ export class DrawPage implements AfterViewInit{
                 }
   ngAfterViewInit(): void {
     this.canvasElement = this.canvas.nativeElement;
+    // this.canvasElement.width = this.platform.width() + '';
+    // this.canvasElement.height = this.platform.height() + '';
       //voor de volledige hoogte en breedte te nemen van het device
       this.renderer.setAttribute(this.canvasElement, 'width', this.platform.width() + '');
       this.renderer.setAttribute(this.canvasElement, 'height', this.platform.height() + '');         
@@ -96,8 +98,13 @@ export class DrawPage implements AfterViewInit{
     let result = await alert.onDidDismiss();
   }
 
-  changeColor(){
+  selectColor(color){
+    this.selectedColor = color;
+    console.log(color);
+  }
 
+  changeSize(size){
+    this.lineWidth = size
   }
 
   teken(currentX, currentY){
@@ -107,7 +114,7 @@ export class DrawPage implements AfterViewInit{
     ctx.lineJoin = "round";
     //brushSize van de stroke
     ctx.lineWidth = this.lineWidth;
-    ctx.currentColor = this.colors;
+    ctx.currentColor = this.selectedColor;
     //Start het tekennen
     ctx.beginPath();
     //Beweeg van posities
