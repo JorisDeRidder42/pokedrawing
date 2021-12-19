@@ -20,7 +20,7 @@ export class DrawPage implements AfterViewInit{
   selectedColor: string = '#459cde';
   colors = [ '#9e2956', '#c2281d', '#de722f', '#edbf4c', '#5db37e', '#459cde', '#4250ad', '#802fa3' ];
   drawing = false;
-  lineWidth: number = 10;
+  lineWidth: number = 20;
 
   constructor(public platform: Platform,
                public renderer: Renderer2, 

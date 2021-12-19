@@ -7,23 +7,6 @@
 </ion-header>
  
 <ion-content scroll-y="false">
- 
-  <ion-range min="1" max="100" color="color" [(ngModel)]="brushSize">
-    <ion-icon size="small" slot="start" name="brush"></ion-icon>
-    <ion-icon slot="end" name="brush"></ion-icon>
-  </ion-range>
-  <ion-row>
-    <ion-col *ngFor="let color of colors" [style.background]="color" class="color-block" tappable
-      (click)="selectColor(color)"></ion-col>
-  </ion-row>
-  <ion-radio-group [(ngModel)]="selectedColor">
-    <ion-row>
-      <ion-col *ngFor="let color of colors" class="ion-text-center">
-          <ion-radio [value]="color"></ion-radio>
-      </ion-col>
-    </ion-row>
-  </ion-radio-group>
- 
     <canvas #myCanvas
       (touchstart)="startDrawing($event)" (touchmove)="handleMoved($event)" (touchend)="endDrawing()"
       (mousedown)="startDrawing($event)" (mousemove)="moved($event)" (mouseup)="endDrawing()">
@@ -34,3 +17,7 @@
           </ion-fab-button>
         </ion-fab>
 </ion-content>
+<ion-range min="1" max="100" color="color" [(ngModel)]="brushSize">
+  <ion-icon size="small" slot="start" name="brush"></ion-icon>
+  <ion-icon slot="end" name="brush"></ion-icon>
+</ion-range>
