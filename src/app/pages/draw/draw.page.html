@@ -1,0 +1,19 @@
+<ion-buttons left>
+  <button
+    *ngFor="let color of colors" (click)="changeColor(color)"
+  >
+    <ion-icon [style.color]="colour" name="brush"></ion-icon>
+  </button>
+</ion-buttons>
+<ion-content [fullscreen]="true" scroll-y="false">
+  <!-- <ion-col *ngFor="let color of colors" [style.background]="color" tappable (click)="selectColor(color)"></ion-col> -->
+    <canvas #myCanvas
+      (touchstart)="startDrawing($event)" (touchmove)="handleMoved($event)" (touchend)="endDrawing()"
+      (mousedown)="startDrawing($event)" (mousemove)="moved($event)" (mouseup)="endDrawing()">
+      </canvas>
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+          <ion-fab-button (click)="presentAlert()">
+            <ion-icon name="trash"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+</ion-content>

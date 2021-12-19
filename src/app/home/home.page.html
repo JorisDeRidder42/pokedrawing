@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+     Pokédrawing
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" scroll-y="false">
+<ion-row>
+    <div class="ion-text-center">
+      <ion-label>Draw ...</ion-label>
+      <p>or you can choose another one in the pokémon-tab</p>
+    </div>
+  </ion-row>
+  <ion-row>
+  <div class="poke-content">
+    <img id="poke-afbeelding" [src]="afbeelding" alt="pokemon-img">
+  </div>
+</ion-row>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="draw">
+          <ion-icon name="pencil"></ion-icon>
+          <ion-label>Draw</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="pokemon">
+          <ion-icon name="person-circle"></ion-icon>
+          <ion-label>Pokémon</ion-label>
+        </ion-tab-button>
+    
+        <ion-tab-button tab="drawings">
+          <ion-icon name="map"></ion-icon>
+          <ion-label>Drawings</ion-label>
+        </ion-tab-button>
+    
+        <ion-tab-button tab="about">
+          <ion-icon name="information-circle"></ion-icon>
+          <ion-label>About</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+</ion-content>
