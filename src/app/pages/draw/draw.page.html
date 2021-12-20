@@ -1,6 +1,11 @@
-<ion-fab class="trashbutton" vertical="bottom" horizontal="end" slot="false">
+<ion-fab class="buttons" vertical="top" horizontal="start" slot="false">
   <ion-fab-button (click)="presentAlert()">
     <ion-icon name="trash"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+<ion-fab class="buttons" vertical="top" horizontal="end" slot="false">
+  <ion-fab-button (click)="undoLast()">
+    <ion-icon name="arrow-undo"></ion-icon>
   </ion-fab-button>
 </ion-fab>
 <canvas #myCanvas
@@ -9,13 +14,12 @@
 </canvas>
 <ion-content scroll-y="false">
   <ion-row>
-    <ion-col *ngFor="let color of colors" [style.background]="color" class="color-block" tappable
-    (click)="selectColor(color)">
-  </ion-col>
+    <ion-col>
+      <input type="color" [(ngModel)]="selectedColor" class="colorpicker">
+    </ion-col>
+      <ion-range min="1" max="100" color="primary" [(ngModel)]="lineWidth">
+        <ion-icon size="small" slot="start" name="brush"></ion-icon>
+        <ion-icon slot="end" name="brush"></ion-icon>
+      </ion-range>
   </ion-row>
-  <ion-range min="1" max="100" color="primary" [(ngModel)]="lineWidth">
-    <ion-icon size="small" slot="start" name="brush"></ion-icon>
-    <ion-icon slot="end" name="brush"></ion-icon>
-  </ion-range>
-  <img [src]="afbeelding" alt="pokemon-img">
 </ion-content>

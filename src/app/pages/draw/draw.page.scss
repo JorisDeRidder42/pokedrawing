@@ -1,11 +1,14 @@
 canvas{
-    background: #f5f6fa !important;
+    background: #f2f2f2 !important;
     z-index:-100;
     display: block;
 }
 .color-block{
     height: 2em;
 }
-.trashbutton{
-    margin-bottom: 100px;
+.buttons{
+    margin-top: 2.5em;
+}
+.colorpicker{
+    margin-top: 1em;
 }

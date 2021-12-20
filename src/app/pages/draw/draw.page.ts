@@ -18,10 +18,12 @@ export class DrawPage implements AfterViewInit{
   drawing = false;
 
   selectedColor: string = '#459cde';
-  colors = [ '#9e2956', '#c2281d', '#de722f', '#edbf4c', '#5db37e', '#459cde', '#4250ad', '#802fa3' ];
+  colors = [ '#9e2956', '#c2281d', '#de722f', '#edbf4c', '#5db37e', '#459cde', '#4250ad', '#802fa3', '#ffffff' ];
   lineWidth: number = 10;
   afbeelding: string;
   indexnummerpokemon: number;
+  restoreArray = [];
+  indexArray :number = -1;
 
   constructor(public platform: Platform,
                public renderer: Renderer2, 
@@ -34,17 +36,15 @@ export class DrawPage implements AfterViewInit{
   ngAfterViewInit(): void {
     this.canvasElement = this.canvas.nativeElement;
     this.canvasElement.width = this.platform.width() + '';
-    this.canvasElement.height = 400;
+    this.canvasElement.height = 650;
 
-    this.LoadImagePokemon();
-    console.log('tekenafbeelding', this.afbeelding);
-          
+    // this.LoadImagePokemon();
   }
-  async LoadImagePokemon(){
-    let b = localStorage.getItem("indexpokemon");
-    this.afbeelding = this.apiService.getPokeImage(b);
-    console.log(this.afbeelding);
-  }
+  // async LoadImagePokemon(){
+  //   // let b = localStorage.getItem("indexpokemon");
+  //   // this.afbeelding = this.apiService.getPokeImage(b);
+  //   //console.log(this.afbeelding);
+  // }
 
 
   startDrawing(event){
@@ -75,6 +75,10 @@ export class DrawPage implements AfterViewInit{
 
   endDrawing(){
     this.drawing = false;
+    let ctx = this.canvasElement.getContext('2d');
+    this.restoreArray.push(ctx.getImageData(0, 0, this.canvasElement.width, this.canvasElement.height));
+    this.indexArray += 1;
+    console.log(this.restoreArray);
   }
 
   async presentAlert(){
@@ -92,15 +96,14 @@ export class DrawPage implements AfterViewInit{
         {
           text: 'Okay',
           handler: () => {
-            let ctx = this.canvasElement.getContext('2d');
-              ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);  
+              this.clearCanvas();
             }
         }
       ]
     });
 
     await alert.present();
-    let result = await alert.onDidDismiss();
+    await alert.onDidDismiss();
   }
 
   selectColor(color){
@@ -130,5 +133,26 @@ export class DrawPage implements AfterViewInit{
 
       this.PositionX = currentX;
       this.PositionY = currentY;
+  }
+  //maak canvas leeg
+  clearCanvas(){
+    let ctx = this.canvasElement.getContext('2d');
+    ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+    this.restoreArray = [];
+    this.indexArray -= 1;
+  }
+
+  undoLast(){
+    if (this.indexArray <= 0) {
+      this.clearCanvas();
+      console.log(this.indexArray);
+    }
+    else{
+      this.indexArray -= 1;
+      this.restoreArray.pop();
+      let ctx = this.canvasElement.getContext('2d');
+      ctx.putImageData(this.restoreArray[this.indexArray], 0, 0);
+      console.log('1',this.indexArray);
+    }
   }
 }

@@ -14,7 +14,6 @@ export class HomePage {
   
   ngOnInit(){
     this.LoadImagePokemon();
-    console.log('afbeeldingpad', this.afbeelding);
   }
   
   async LoadImagePokemon(){
