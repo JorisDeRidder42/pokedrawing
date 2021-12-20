@@ -9,6 +9,7 @@ import { map} from 'rxjs/operators';
 export class ApicallService {
   maxGen1: number = 151;
   minGen1: number = 1;
+  indexnummerpokemon: any;
 
   baseUrl = 'https://pokeapi.co/api/v2/pokemon/';
   imageShinyUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/';
@@ -17,7 +18,9 @@ export class ApicallService {
   constructor(public http: HttpClient) { }
 
   CreateRandomIndex(){
-    return Math.floor(Math.random() * this.maxGen1) + this.minGen1
+    let nummerpokemon = Math.floor(Math.random() * this.maxGen1) + this.minGen1
+    localStorage.setItem("indexpokemon", nummerpokemon.toString());
+    return nummerpokemon;
   }
 
   getPokeImage(index){

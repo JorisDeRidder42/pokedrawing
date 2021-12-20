@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Renderer2, ViewChild } from '@angular/core';
 import { AlertController,PopoverController, Platform} from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import { ApicallService } from 'src/app/services/apicall.service';
 
 @Component({
   selector: 'app-draw',
@@ -19,22 +20,33 @@ export class DrawPage implements AfterViewInit{
   selectedColor: string = '#459cde';
   colors = [ '#9e2956', '#c2281d', '#de722f', '#edbf4c', '#5db37e', '#459cde', '#4250ad', '#802fa3' ];
   lineWidth: number = 10;
+  afbeelding: string;
+  indexnummerpokemon: number;
 
   constructor(public platform: Platform,
                public renderer: Renderer2, 
                public alertController: AlertController,
                public colorpopoverController: PopoverController,
                public brushpopoverController: PopoverController,
+               public apiService: ApicallService,
                public commonModule: CommonModule) {
                 }
   ngAfterViewInit(): void {
     this.canvasElement = this.canvas.nativeElement;
     this.canvasElement.width = this.platform.width() + '';
-    this.canvasElement.height = 650;
-      //voor de volledige hoogte en breedte te nemen van het device
-      // this.renderer.setAttribute(this.canvasElement, 'width', this.platform.width() + '');
-      // this.renderer.setAttribute(this.canvasElement, 'height', this.platform.height() + '');         
+    this.canvasElement.height = 400;
+
+    this.LoadImagePokemon();
+    console.log('tekenafbeelding', this.afbeelding);
+          
   }
+  async LoadImagePokemon(){
+    let b = localStorage.getItem("indexpokemon");
+    this.afbeelding = this.apiService.getPokeImage(b);
+    console.log(this.afbeelding);
+  }
+
+
   startDrawing(event){
     this.drawing = true;
     let canvasPositie = this.canvasElement.getBoundingClientRect();

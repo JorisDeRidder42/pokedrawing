@@ -10,13 +10,14 @@ export class HomePage {
 
   constructor(public apiService: ApicallService) {}
   afbeelding: string;
+  indexnummerpokemon: number;
   
-  ngOnInit(index){
-    this.LoadImagePokemon(index);
-    //console.log('afbeeldingpad', this.afbeelding, this.pokenaam);
+  ngOnInit(){
+    this.LoadImagePokemon();
+    console.log('afbeeldingpad', this.afbeelding);
   }
   
-  async LoadImagePokemon(index){
+  async LoadImagePokemon(){
     this.afbeelding = this.apiService.getPokeImage(this.apiService.CreateRandomIndex());
   }
 }
