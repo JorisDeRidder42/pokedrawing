@@ -28,7 +28,7 @@ export class ApicallService {
     return `${this.baseUrl}${index}`;
   }
   getPokemon(offset = 0){
-    return this.http.get(`${this.baseUrl}/pokemon?offset=${offset}&limit=25`,{
+    return this.http.get(`${this.baseUrl}?offset=${offset}&limit=25`,{
       observe: 'body',
       responseType: 'json'
     }).pipe(

@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'drawings',
     loadChildren: () => import('./pages/drawings/drawings.module').then( m => m.DrawingsPageModule)
   },
+  {
+    path: 'home/pokemon/:index',
+    loadChildren: () => import('./details/details.module').then( m => m.DetailsPageModule)
+  },
 ];
 
 @NgModule({

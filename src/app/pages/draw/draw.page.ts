@@ -8,19 +8,17 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./draw.page.scss'],
 })
 export class DrawPage implements AfterViewInit{
-  @ViewChild('myCanvas') canvas: any;
-  
-  //de canvas API om te tekennen
+  @ViewChild('myCanvas', {static: false}) canvas: any;
   canvasElement: any;
   //de punten waar de user tekent
   PositionX: number;
   PositionY: number;
-  //public photos: any;
-  //base64Image: any;
+
+  drawing = false;
+
   selectedColor: string = '#459cde';
   colors = [ '#9e2956', '#c2281d', '#de722f', '#edbf4c', '#5db37e', '#459cde', '#4250ad', '#802fa3' ];
-  drawing = false;
-  lineWidth: number = 20;
+  lineWidth: number = 10;
 
   constructor(public platform: Platform,
                public renderer: Renderer2, 
@@ -31,17 +29,16 @@ export class DrawPage implements AfterViewInit{
                 }
   ngAfterViewInit(): void {
     this.canvasElement = this.canvas.nativeElement;
-    // this.canvasElement.width = this.platform.width() + '';
-    // this.canvasElement.height = this.platform.height() + '';
+    this.canvasElement.width = this.platform.width() + '';
+    this.canvasElement.height = 650;
       //voor de volledige hoogte en breedte te nemen van het device
-      this.renderer.setAttribute(this.canvasElement, 'width', this.platform.width() + '');
-      this.renderer.setAttribute(this.canvasElement, 'height', this.platform.height() + '');         
+      // this.renderer.setAttribute(this.canvasElement, 'width', this.platform.width() + '');
+      // this.renderer.setAttribute(this.canvasElement, 'height', this.platform.height() + '');         
   }
   startDrawing(event){
     this.drawing = true;
-    //wanneer je het scherm aanraakt om te tekennen
     let canvasPositie = this.canvasElement.getBoundingClientRect();
-    // console.log(canvasPositie);
+
     this.PositionX = event.pageX - canvasPositie.x;
     this.PositionY = event.pageY - canvasPositie.y;
     //console.log(this.PositionX, this.PositionY);
@@ -51,21 +48,17 @@ export class DrawPage implements AfterViewInit{
     //Browser support
     if (!this.drawing) return
     const canvasPositie = this.canvasElement.getBoundingClientRect();
-    let ctx = this.canvasElement.getContext('2d');
     let currentX = event.pageX - canvasPositie.x;
     let currentY = event.pageY - canvasPositie.y;
-    
-    //console.log('start:' ,event);
-    this.teken(currentX, currentY);
+    this.teken(currentX, currentY)
+
   }
 
   handleMoved(event){
     //Mobile support
     let currentX = event.touches[0].pageX;
     let currentY = event.touches[0].pageY;
-        
-      this.teken(currentX, currentY);
-        //console.log('move mobile:' ,event);
+    this.teken(currentX, currentY)
   }
 
   endDrawing(){
@@ -108,13 +101,10 @@ export class DrawPage implements AfterViewInit{
   }
 
   teken(currentX, currentY){
-    //2d tekennen
     let ctx = this.canvasElement.getContext('2d');
-    // de lijn is afgerond
     ctx.lineJoin = "round";
-    //brushSize van de stroke
     ctx.lineWidth = this.lineWidth;
-    ctx.currentColor = this.selectedColor;
+    ctx.strokeStyle = this.selectedColor;
     //Start het tekennen
     ctx.beginPath();
     //Beweeg van posities

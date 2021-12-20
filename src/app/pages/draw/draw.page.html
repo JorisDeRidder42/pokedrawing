@@ -1,23 +1,20 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>
-      Ionic Canvas Drawing
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
- 
+<ion-fab class="trashbutton" vertical="bottom" horizontal="end" slot="false">
+  <ion-fab-button (click)="presentAlert()">
+    <ion-icon name="trash"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+<canvas #myCanvas
+(touchstart)="startDrawing($event)" (touchmove)="handleMoved($event)" (touchend)="endDrawing()"
+(mousedown)="startDrawing($event)" (mousemove)="moved($event)" (mouseup)="endDrawing()">
+</canvas>
 <ion-content scroll-y="false">
-    <canvas #myCanvas
-      (touchstart)="startDrawing($event)" (touchmove)="handleMoved($event)" (touchend)="endDrawing()"
-      (mousedown)="startDrawing($event)" (mousemove)="moved($event)" (mouseup)="endDrawing()">
-      </canvas>
-        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-          <ion-fab-button (click)="presentAlert()">
-            <ion-icon name="trash"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
+  <ion-row>
+    <ion-col *ngFor="let color of colors" [style.background]="color" class="color-block" tappable
+    (click)="selectColor(color)">
+  </ion-col>
+  </ion-row>
+  <ion-range min="1" max="100" color="primary" [(ngModel)]="lineWidth">
+    <ion-icon size="small" slot="start" name="brush"></ion-icon>
+    <ion-icon slot="end" name="brush"></ion-icon>
+  </ion-range>
 </ion-content>
-<ion-range min="1" max="100" color="color" [(ngModel)]="brushSize">
-  <ion-icon size="small" slot="start" name="brush"></ion-icon>
-  <ion-icon slot="end" name="brush"></ion-icon>
-</ion-range>
