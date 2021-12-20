@@ -90,7 +90,6 @@ export class DrawPage implements AfterViewInit{
           text: 'Cancel',
           role: 'Cancel',
           handler: () => {
-            console.log('confirm cancel');
           }
         }, 
         {
