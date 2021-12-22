@@ -36,15 +36,15 @@ export class DrawPage implements AfterViewInit{
   ngAfterViewInit(): void {
     this.canvasElement = this.canvas.nativeElement;
     this.canvasElement.width = this.platform.width() + '';
-    this.canvasElement.height = 650;
+    this.canvasElement.height = 450;
 
-    // this.LoadImagePokemon();
+   this.LoadImagePokemon();
   }
-  // async LoadImagePokemon(){
-  //   // let b = localStorage.getItem("indexpokemon");
-  //   // this.afbeelding = this.apiService.getPokeImage(b);
-  //   //console.log(this.afbeelding);
-  // }
+  async LoadImagePokemon(){
+ let b = localStorage.getItem("indexpokemon");
+  this.afbeelding = this.apiService.getPokeImage(b);
+  console.log(this.afbeelding);
+}
 
 
   startDrawing(event){
@@ -78,7 +78,7 @@ export class DrawPage implements AfterViewInit{
     let ctx = this.canvasElement.getContext('2d');
     this.restoreArray.push(ctx.getImageData(0, 0, this.canvasElement.width, this.canvasElement.height));
     this.indexArray += 1;
-    console.log(this.restoreArray);
+    //console.log(this.restoreArray);
   }
 
   async presentAlert(){
@@ -107,7 +107,7 @@ export class DrawPage implements AfterViewInit{
 
   selectColor(color){
     this.selectedColor = color;
-    console.log(color);
+    //console.log(color);
   }
 
   changeSize(size){

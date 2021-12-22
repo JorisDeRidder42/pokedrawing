@@ -28,7 +28,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/drawings/drawings.module').then( m => m.DrawingsPageModule)
   },
   {
-    path: 'home/:index',
+    path: 'home/pokemon/:index',
     loadChildren: () => import('./details/details.module').then( m => m.DetailsPageModule)
   },
 ];

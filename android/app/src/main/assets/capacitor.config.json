@@ -1,0 +1,6 @@
+{
+	"appId": "be.thomasmore.graduaten.pokedraw",
+	"appName": "pokedraw",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
