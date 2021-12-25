@@ -67,7 +67,6 @@ export class DrawPage implements AfterViewInit{
   }
 
   handleMoved(event){
-    //Mobile support
     let currentX = event.touches[0].pageX;
     let currentY = event.touches[0].pageY;
     this.teken(currentX, currentY)
@@ -116,8 +115,11 @@ export class DrawPage implements AfterViewInit{
 
   teken(currentX, currentY){
     let ctx = this.canvasElement.getContext('2d');
+    //lijn is afgerond
     ctx.lineJoin = "round";
+    //breedte van de lijn
     ctx.lineWidth = this.lineWidth;
+    //kleur van de lijn
     ctx.strokeStyle = this.selectedColor;
     //Start het tekennen
     ctx.beginPath();
@@ -129,7 +131,8 @@ export class DrawPage implements AfterViewInit{
     ctx.closePath();
     //teken de stroke
     ctx.stroke();
-
+       
+    //onthoud positie X en Y
       this.PositionX = currentX;
       this.PositionY = currentY;
   }
@@ -137,6 +140,7 @@ export class DrawPage implements AfterViewInit{
   clearCanvas(){
     let ctx = this.canvasElement.getContext('2d');
     ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+    //Restore the array length
     this.restoreArray = [];
     this.indexArray -= 1;
   }
@@ -144,7 +148,6 @@ export class DrawPage implements AfterViewInit{
   undoLast(){
     if (this.indexArray <= 0) {
       this.clearCanvas();
-      console.log(this.indexArray);
     }
     else{
       this.indexArray -= 1;

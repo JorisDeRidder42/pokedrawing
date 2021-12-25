@@ -3,10 +3,18 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
-    <ion-title class="ion-text-capitalize">Pokemon Name</ion-title>
+    <ion-title class="ion-text-capitalize">{{ details?.name }}</ion-title>
   </ion-toolbar>
 </ion-header>
  
-<ion-content>
-  
+<ion-content fullscreen="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Awesome Subtitle</ion-card-subtitle>
+      <ion-card-title>Awesome Title</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Awesome content
+    </ion-card-content>
+  </ion-card>
 </ion-content>
