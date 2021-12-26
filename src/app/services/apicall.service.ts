@@ -26,10 +26,6 @@ export class ApicallService {
   getPokeImage(index){
      return `${this.imageUrl}${index}.png`;
   }
-
-  getPokemono(index){
-    return `${this.baseUrl}${index}`;
-  }
   getPokemon(offset = 0){
     return this.http.get(`${this.baseUrl}?offset=${offset}&limit=25`,{
       observe: 'body',
@@ -50,7 +46,7 @@ export class ApicallService {
   }
 
   findPokemon(search){
-   return this.http.get(`${this.baseUrl}/pokemon/${search}`).pipe(
+   return this.http.get(`${this.baseUrl}${search}`).pipe(
      map(pokemon => {
        pokemon['image'] = this.getPokeImage(pokemon['id']);
        pokemon['pokeIndex'] = pokemon['id'];
@@ -60,7 +56,7 @@ export class ApicallService {
  }
 
  getPokeDetails(index){
-   return this.http.get(`${this.baseUrl}/pokemon/${index}`).pipe(
+   return this.http.get(`${this.baseUrl}${index}`).pipe(
      map(pokemon =>{
        let sprites = Object.keys(pokemon['sprites']);
        pokemon['images'] = sprites

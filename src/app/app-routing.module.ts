@@ -32,7 +32,6 @@ const routes: Routes = [
     loadChildren: () => import('./details/details.module').then( m => m.DetailsPageModule)
   },
 ];
-
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
