@@ -8,8 +8,8 @@
 
 <ion-content [fullscreen]="true" scroll-y="false">
 <ion-row>
-    <div class="ion-text-center" *ngIf="home">
-      <ion-item>Draw {{home.name}}</ion-item>
+    <div class="ion-text-center" *ngIf="details">
+      <ion-label>Draw {{details?.name}}</ion-label>
       <p>you can check again or choose another pokémon to draw with the watch tab</p>
     </div>
   </ion-row>
