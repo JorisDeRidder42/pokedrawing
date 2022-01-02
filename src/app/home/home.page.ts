@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ApicallService } from '../services/apicall.service';
 
 @Component({
@@ -8,9 +9,9 @@ import { ApicallService } from '../services/apicall.service';
 })
 export class HomePage {
 
-  constructor(public apiService: ApicallService) {}
+  constructor(public route: ActivatedRoute, private apiService :ApicallService) {}
   afbeelding: string;
-  indexnummerpokemon: number;
+  name:any;
   
   ngOnInit(){
     this.LoadImagePokemon();
@@ -18,5 +19,6 @@ export class HomePage {
   
   async LoadImagePokemon(){
     this.afbeelding = this.apiService.getPokeImage(this.apiService.CreateRandomIndex());
+    console.log(this.afbeelding)
   }
 }

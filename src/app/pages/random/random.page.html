@@ -5,13 +5,14 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
+<ion-fab class="buttons" vertical="bottom" horizontal="end" slot="false">
+  <ion-fab-button color="warning" (click)="randomPokemon()">
+    <ion-icon name="dice"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 <ion-content [fullscreen]="true" scroll-y="false">
-<ion-row>
-    <div class="ion-text-center">
-      <ion-label>Draw {{ details?.name }}</ion-label>
-      <p>or you can choose another pokémon to draw with the random tab</p>
-    </div>
+<ion-row class="ion-justify-content-center">
+      <ion-label>Draw ...</ion-label>
   </ion-row>
   <ion-row>
   <div class="poke-content">

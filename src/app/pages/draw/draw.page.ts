@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Renderer2, ViewChild } from '@angular/core';
-import { AlertController,PopoverController, Platform} from '@ionic/angular';
+import { AlertController, Platform} from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { ApicallService } from 'src/app/services/apicall.service';
 
@@ -28,8 +28,6 @@ export class DrawPage implements AfterViewInit{
   constructor(public platform: Platform,
                public renderer: Renderer2, 
                public alertController: AlertController,
-               public colorpopoverController: PopoverController,
-               public brushpopoverController: PopoverController,
                public apiService: ApicallService,
                public commonModule: CommonModule) {
                 }
@@ -41,9 +39,8 @@ export class DrawPage implements AfterViewInit{
    this.LoadImagePokemon();
   }
   async LoadImagePokemon(){
- let b = localStorage.getItem("indexpokemon");
+  let b = localStorage.getItem("indexpokemon");
   this.afbeelding = this.apiService.getPokeImage(b);
-  console.log(this.afbeelding);
 }
 
 
@@ -144,6 +141,12 @@ export class DrawPage implements AfterViewInit{
     this.restoreArray = [];
     this.indexArray -= 1;
   }
+
+  saveCanvasImage(){
+
+  }
+
+  
 
   undoLast(){
     if (this.indexArray <= 0) {

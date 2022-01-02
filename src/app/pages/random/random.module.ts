@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DrawingsPageRoutingModule } from './drawings-routing.module';
+import { RandomPageRoutingModule } from './random-routing.module';
 
-import { DrawingsPage } from './drawings.page';
+import { RandomPage } from './random.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DrawingsPageRoutingModule
+    RandomPageRoutingModule
   ],
-  declarations: [DrawingsPage]
+  declarations: [RandomPage]
 })
-export class DrawingsPageModule {}
+export class RandomPageModule {}

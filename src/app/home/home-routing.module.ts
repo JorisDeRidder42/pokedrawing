@@ -35,11 +35,11 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'drawings',
+        path: 'random',
         children: [
           {
             path: '',
-           loadChildren: () => import('../pages/drawings/drawings.module').then( m => m.DrawingsPageModule)
+           loadChildren: () => import('../pages/random/random.module').then( m => m.RandomPageModule)
           }
         ]
       },

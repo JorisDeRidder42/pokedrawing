@@ -1,13 +1,13 @@
     <ion-searchbar placeholder="Search pokemon" (ionChange)="onSearchChange($event)"></ion-searchbar>
   <ion-content>
     <ion-list>
-      <ion-item *ngFor="let poke of pokemon;" [routerLink]="poke.pokeIndex">
+      <ion-item *ngFor="let poke of pokemons;" [routerLink]="poke.pokeIndex">
         <ion-avatar slot="start">
           <img [src]="poke.image" style="background:#f2f2f2;"/>
         </ion-avatar>
         <ion-label class="ion-text-capitalize">
           <h2>{{poke.name}}</h2>
-          <h6>#{{poke.pokeIndex}}</h6>
+          <h6>#{{poke.pokeIndex}}</h6>                                                                           
         </ion-label>
       </ion-item>
     </ion-list>

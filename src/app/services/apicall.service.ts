@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map} from 'rxjs/operators';
-import { Storage } from '@capacitor/storage';
 
 
 @Injectable({
@@ -13,7 +12,6 @@ export class ApicallService {
   indexnummerpokemon: any;
 
   baseUrl = 'https://pokeapi.co/api/v2/pokemon/';
-  imageShinyUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/';
   imageUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/';
 
   constructor(public http: HttpClient) { }
@@ -67,6 +65,4 @@ export class ApicallService {
      })
    );
  }
-
-
 }

@@ -9,21 +9,22 @@ import { IonInfiniteScroll } from '@ionic/angular';
 })
 export class PokemonPage {
   offset = 0;
-  pokemon = [];
+  pokemons: any[] = [];
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
 
   constructor(private apiccall: ApicallService) { }
-
   ngOnInit(){
     this.loadPokemon();
   }
   loadPokemon(loadMore=false, event?){
+    //als laadmeer == true dan + 25 geladen
     if(loadMore){
       this.offset += 25;
     }
 
-    this.apiccall.getPokemon(this.offset).subscribe(res => {
-        this.pokemon=[...this.pokemon, ...res]
+    this.apiccall.getPokemon(this.offset)
+    .subscribe((res: any) => {
+        this.pokemons=[...this.pokemons, ...res]
       if (event) {
         event.target.complete();
       }
@@ -33,6 +34,8 @@ export class PokemonPage {
       }
     })
   }
+
+  //zoeken
   onSearchChange(e){
     let value = e.detail.value;
 
@@ -43,9 +46,9 @@ export class PokemonPage {
     }
 
     this.apiccall.findPokemon(value).subscribe(res => {
-      this.pokemon = [res];
+      this.pokemons = [res];
     }, err => {
-      this.pokemon = [];
+      this.pokemons = [];
     })
   }
 }
