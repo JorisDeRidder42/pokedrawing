@@ -9,6 +9,7 @@ import { IonInfiniteScroll } from '@ionic/angular';
 })
 export class PokemonPage {
   offset = 0;
+  searchText = '';
   pokemons: any[] = [];
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
 
@@ -17,7 +18,7 @@ export class PokemonPage {
     this.loadPokemon();
   }
   loadPokemon(loadMore=false, event?){
-    //als laadmeer == true dan + 25 geladen
+    //als loadmore == true dan + 25 geladen
     if(loadMore){
       this.offset += 25;
     }
@@ -34,21 +35,8 @@ export class PokemonPage {
       }
     })
   }
-
-  //zoeken
-  onSearchChange(e){
-    let value = e.detail.value;
-
-    if (value = '') {
-      this.offset = 0;
-      this.loadPokemon();
-      return;
-    }
-
-    this.apiccall.findPokemon(value).subscribe(res => {
-      this.pokemons = [res];
-    }, err => {
-      this.pokemons = [];
-    })
+  async searchChangeHandler(event: any): Promise<void> {
+    this.searchText = event.target.value;
+    await this.loadPokemon(true);
   }
 }

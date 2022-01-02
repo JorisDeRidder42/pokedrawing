@@ -10,7 +10,7 @@
 <ion-content>
   
   <div *ngIf="details">
-    <ion-slides pager="true">
+    <ion-slides pager="true" [options]="slideOpts">
       <ion-slide *ngFor="let sprite of details.images">
         <img [src]="sprite" style="height: 250px;">
       </ion-slide>
@@ -18,22 +18,20 @@
  
     <ion-card>
       <ion-card-header>
-        <ion-card-title class="ion-text-capitalize">#{{ details.id }} {{ details.name }}
-          <ion-chip color="primary" *ngFor="let t of details.types">
+        <ion-card-title class="ion-text-capitalize">#{{ details.id }} {{ details.name }} 
+          <ion-chip color="warning" *ngFor="let t of details.types">
             <ion-label>{{ t.type.name }}</ion-label>
           </ion-chip>
         </ion-card-title>
         <ion-card-subtitle class="ion-text-capitalize">Height: 0.{{ details.height }}m </ion-card-subtitle>
-        <ion-card-subtitle class="ion-text-capitalize">weight:  {{ details.weight}}00g  </ion-card-subtitle>
+        <ion-card-subtitle class="ion-text-capitalize">weight: {{ details.weight}}00g  </ion-card-subtitle>
       </ion-card-header>
  
       <ion-card-content>
         <ion-list lines="full">
-          <ion-item *ngFor="let s of details.stats" class="ion-text-capitalize">
-            <ion-label slot="start"><b>{{ s.stat.name }}:</b></ion-label>
-            <ion-label slot="end">
-              {{ s.base_stat }}
-            </ion-label>
+          <ion-item *ngFor="let detail of details.stats" class="ion-text-capitalize">
+            <ion-label slot="start">{{ detail.stat.name }}:</ion-label>
+            <ion-label slot="end">{{ detail.base_stat }}</ion-label>
           </ion-item>
         </ion-list>
       </ion-card-content>

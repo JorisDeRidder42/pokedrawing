@@ -8,9 +8,9 @@
 
 <ion-content [fullscreen]="true" scroll-y="false">
 <ion-row>
-    <div class="ion-text-center">
-      <ion-label>Draw {{ details?.name }}</ion-label>
-      <p>or you can choose another pokémon to draw with the random tab</p>
+    <div class="ion-text-center" *ngIf="home">
+      <ion-item>Draw {{home.name}}</ion-item>
+      <p>you can check again or choose another pokémon to draw with the watch tab</p>
     </div>
   </ion-row>
   <ion-row>
@@ -25,13 +25,13 @@
           <ion-label>Draw</ion-label>
         </ion-tab-button>
         <ion-tab-button tab="pokemon">
-          <ion-icon name="person-circle"></ion-icon>
+          <ion-icon src="/assets/icon/generated.svg"></ion-icon>
           <ion-label>Pokémon</ion-label>
         </ion-tab-button>
     
         <ion-tab-button tab="random">
-          <ion-icon name="dice"></ion-icon>
-          <ion-label>Random</ion-label>
+          <ion-icon name="eye"></ion-icon>
+          <ion-label>Watch</ion-label>
         </ion-tab-button>
     
         <ion-tab-button tab="about">

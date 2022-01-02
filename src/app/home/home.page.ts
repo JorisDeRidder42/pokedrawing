@@ -19,6 +19,6 @@ export class HomePage {
   
   async LoadImagePokemon(){
     this.afbeelding = this.apiService.getPokeImage(this.apiService.CreateRandomIndex());
-    console.log(this.afbeelding)
+    // console.log(this.afbeelding)
   }
 }

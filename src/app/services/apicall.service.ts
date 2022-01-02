@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map} from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, catchError, retry} from 'rxjs/operators';
 
 
 @Injectable({
@@ -21,15 +22,26 @@ export class ApicallService {
     localStorage.setItem("indexpokemon", nummerpokemon.toString());
     return nummerpokemon;
   }
-
+  
   getPokeImage(index){
      return `${this.imageUrl}${index}.png`;
   }
+  
   getPokemon(offset = 0){
     return this.http.get(`${this.baseUrl}?offset=${offset}&limit=25`,{
       observe: 'body',
       responseType: 'json'
-    }).pipe(
+    })
+    .pipe(
+       // Handle any errors and return an alternative value
+        // when an error occurs.
+        catchError(error => {
+          console.error("error",error);
+          return (undefined);
+        }),
+        // Retry the request 3 times before throwing an error.
+        // Useful for intermittent network connections.
+        retry(3),
       map(result => {
         return result['results'];
       }),

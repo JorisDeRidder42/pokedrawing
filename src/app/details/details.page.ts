@@ -10,6 +10,12 @@ import { ApicallService } from '../services/apicall.service';
 export class DetailsPage implements OnInit {
 
   details: any;
+  slideOpts = {
+    autoplay: {
+      delay: 2000,
+      disableOnInteraction: false,
+    }
+  }
 
   constructor(private route: ActivatedRoute, private apicall :ApicallService) { }
 

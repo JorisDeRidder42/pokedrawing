@@ -1,9 +1,9 @@
-    <ion-searchbar placeholder="Search pokemon" (ionChange)="onSearchChange($event)"></ion-searchbar>
-  <ion-content>
+  <ion-content [fullscreen]="true">
+    <ion-searchbar type="name" placeholder="Search pokemon"  [value]="searchText" (ionChange)="searchPokemon($event)" debounce="500"></ion-searchbar>
     <ion-list>
       <ion-item *ngFor="let poke of pokemons;" [routerLink]="poke.pokeIndex">
         <ion-avatar slot="start">
-          <img [src]="poke.image" style="background:#f2f2f2;"/>
+          <img [src]="poke.image" style="background:#f2f2f2;" *ngIf="poke.image != 'null'">
         </ion-avatar>
         <ion-label class="ion-text-capitalize">
           <h2>{{poke.name}}</h2>
