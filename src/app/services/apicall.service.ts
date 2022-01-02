@@ -12,7 +12,7 @@ export class ApicallService {
   minGen1: number = 1;
   indexnummerpokemon: any;
 
-  baseUrl = 'https://pokeapi.co/api/v2/pokemon';
+  baseUrl = 'https://pokeapi.co/api/v2/pokemon/';
   imageUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/';
 
   constructor(public http: HttpClient) { }
@@ -23,10 +23,11 @@ export class ApicallService {
     return nummerpokemon;
   }
   
+  //ophalen image in pokemon tab
   getPokeImage(index){
      return `${this.imageUrl}${index}.png`;
   }
-  
+  //alle pokemon in de pokemon tab
   getPokemon(offset = 0){
     return this.http.get(`${this.baseUrl}?offset=${offset}&limit=25`,{
       observe: 'body',
@@ -55,7 +56,7 @@ export class ApicallService {
       })
     )
   }
-
+  //zoek pokemon
   findPokemon(search){
    return this.http.get(`${this.baseUrl}${search}`).pipe(
      map(pokemon => {
@@ -65,7 +66,7 @@ export class ApicallService {
      })
    );
  }
-
+  //toon de details van de pokemons
  getPokeDetails(index){
    return this.http.get(`${this.baseUrl}${index}`).pipe(
      map(pokemon =>{

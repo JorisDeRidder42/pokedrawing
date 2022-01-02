@@ -24,16 +24,16 @@ export class PokemonPage {
     }
 
     this.apiccall.getPokemon(this.offset)
-    // .subscribe((res: any) => {
-    //     this.pokemons=[...this.pokemons, ...res]
-    //   if (event) {
-    //     event.target.complete();
-    //   }
+    .subscribe((res: any) => {
+        this.pokemons=[...this.pokemons, ...res]
+      if (event) {
+        event.target.complete();
+      }
 
-    //   if (this.offset == 125) {
-    //     this.infinite.disabled = true;
-    //   }
-    // })
+      if (this.offset == 125) {
+        this.infinite.disabled = true;
+      }
+    })
   }
   async searchPokemon(event: any): Promise<void> {
     this.searchText = event.target.value;
