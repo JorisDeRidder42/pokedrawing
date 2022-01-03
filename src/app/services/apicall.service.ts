@@ -22,11 +22,14 @@ export class ApicallService {
     localStorage.setItem("indexpokemon", nummerpokemon.toString());
     return nummerpokemon;
   }
-  
   //ophalen image in pokemon tab
   getPokeImage(index){
      return `${this.imageUrl}${index}.png`;
   }
+  getPokeName(index){
+    return `${this.baseUrl}${index}`;
+  }
+
   //alle pokemon in de pokemon tab
   getPokemon(offset = 0){
     return this.http.get(`${this.baseUrl}?offset=${offset}&limit=25`,{

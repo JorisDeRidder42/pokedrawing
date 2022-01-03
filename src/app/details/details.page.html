@@ -32,6 +32,13 @@
             <ion-label slot="start">{{ detail.stat.name }}:</ion-label>
             <ion-label slot="end">{{ detail.base_stat }}</ion-label>
           </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Abilities:
+              <span *ngFor="let detail of details.abilities;"
+                class="ion-text-capitalize">
+                {{ detail.ability.name }}
+              </span></ion-label>
+          </ion-item>
         </ion-list>
       </ion-card-content>
     </ion-card>

@@ -143,11 +143,19 @@ export class DrawPage implements AfterViewInit{
   }
 
   saveCanvasImage(){
+      var dataUrl = this.canvasElement.toDataURL();
 
+      //clear canvas after saving
+      let ctx = this.canvasElement.getContext('2d');
+      ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+      //console.log(dataUrl);
+      // removes data:image/png;base64 from the string path file
+      var data = dataUrl.split(',')[1];
+      console.log(data);
+   
+      // to save the canvas as png image and navigate to the next page to show the saved image
   }
-
-  
-
+   
   undoLast(){
     if (this.indexArray <= 0) {
       this.clearCanvas();

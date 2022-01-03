@@ -13,17 +13,18 @@ export class PokemonPage {
   pokemons: any[] = [];
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
 
-  constructor(private apiccall: ApicallService) { }
+  constructor(public apicall: ApicallService) { }
   ngOnInit(){
     this.loadPokemon();
   }
+
   loadPokemon(loadMore=false, event?){
     //als loadmore == true dan + 25 geladen
     if(loadMore){
       this.offset += 25;
     }
 
-    this.apiccall.getPokemon(this.offset)
+    this.apicall.getPokemon(this.offset)
     .subscribe((res: any) => {
         this.pokemons=[...this.pokemons, ...res]
       if (event) {

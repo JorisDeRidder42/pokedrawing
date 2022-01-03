@@ -11,8 +11,10 @@ export class HomePage {
 
   constructor(public route: ActivatedRoute, private apiService :ApicallService) {}
   afbeelding: string;
-  name:string;
-  nummerpokemon: number;
+  nummerpokemon:number
+  index:number
+  name: string;
+  details:any;
   
   ngOnInit(){
     this.LoadImagePokemon();
