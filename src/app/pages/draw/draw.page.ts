@@ -34,7 +34,7 @@ export class DrawPage implements AfterViewInit{
   ngAfterViewInit(): void {
     this.canvasElement = this.canvas.nativeElement;
     this.canvasElement.width = this.platform.width() + '';
-    this.canvasElement.height = 450;
+    this.canvasElement.height = 650;
 
    this.LoadImagePokemon();
   }

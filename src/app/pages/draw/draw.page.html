@@ -17,9 +17,10 @@
     <ion-col>
       <input type="color" [(ngModel)]="selectedColor" class="colorpicker">
     </ion-col>
-      <ion-range min="1" max="100" color="primary" [(ngModel)]="lineWidth">
+      <ion-range [(ngModel)]="lineWidth" pin="true" min="1" max="100" step="1" color="primary">
         <ion-icon size="small" slot="start" name="brush"></ion-icon>
         <ion-icon slot="end" name="brush"></ion-icon>
+        <p> Value: {{lineWidth}}</p>
       </ion-range>
       <!-- <img id="poke-afbeelding" [src]="afbeelding" alt="pokemon-img"> -->
   </ion-row>
