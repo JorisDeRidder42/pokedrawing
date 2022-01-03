@@ -11,7 +11,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "android": "ionic build --prod && npx cap sync android && npx cap open android",
-    "android-splash": "cordova-res android --type splash --skip-config --copy"
+    "android-splash": "cordova-res android --type splash --skip-config --copy",
+    "android-icon-adaptive": "cordova-res android --type adaptive-icon --icon-foreground-source resources/icon.png --icon-background-source #FFFFFF --skip-config --copy"
   },
   "private": true,
   "dependencies": {
@@ -30,7 +31,6 @@
     "@ionic-native/base64-to-gallery": "^5.36.0",
     "@ionic-native/file": "^5.36.0",
     "@ionic/angular": "^6.0.0",
-    "axios": "^0.24.0",
     "canvas": "^2.8.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.1",
