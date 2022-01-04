@@ -7,17 +7,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" scroll-y="false">
-<ion-row>
+<ion-col>
     <div class="ion-text-center">
       <h1>Welcome to pokédraw</h1>
-      <p>Your challenge is to draw pokemon.name from gen 1</p>
     </div>
-  </ion-row>
-  <ion-row>
+</ion-col>
+  <ion-col>
   <div class="poke-content">
     <img id="poke-afbeelding" [src]="afbeelding" alt="random pokemon">
   </div>
-</ion-row>
+  </ion-col>
     <ion-tabs>
       <ion-tab-bar slot="bottom">
         <ion-tab-button tab="draw">

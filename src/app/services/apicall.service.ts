@@ -29,6 +29,9 @@ export class ApicallService {
   getPokeImage(index){
      return `${this.imageUrl}${index}.png`;
   }
+  getPokeName(nummerpokemon){
+    return `${this.baseUrl}${nummerpokemon}`;
+ }
   //alle pokemon in de pokemon tab
   getPokemon(offset = 0, filter = ''): Observable <pokemonApiResult<pokemon>>{
     return this.http

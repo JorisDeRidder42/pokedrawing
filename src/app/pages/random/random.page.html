@@ -11,14 +11,11 @@
   </ion-fab-button>
 </ion-fab>
 <ion-content [fullscreen]="true" scroll-y="false">
-<ion-row class="ion-justify-content-center">
-      <ion-label>Draw ...</ion-label>
-  </ion-row>
-  <ion-row>
+  <ion-col>
   <div class="poke-content">
     <img id="poke-afbeelding" [src]="afbeelding" alt="pokemon-img">
   </div>
-</ion-row>
+  </ion-col>
     <ion-tabs>
       <ion-tab-bar slot="bottom">
         <ion-tab-button tab="draw">
