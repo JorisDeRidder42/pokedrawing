@@ -9,14 +9,12 @@
  
 <ion-content>
   <div *ngIf="details">
-    <ion-slides pager="true" [options]="slideOpts">
-      <ion-slide *ngFor="let sprite of details.images">
-        <img [src]="sprite" style="height: 250px;">
-      </ion-slide>
-    </ion-slides>
- 
     <ion-card>
       <ion-card-header>
+        <img [src]="details.sprites.front_default">
+        <img [src]="details.sprites.back_default">
+        <img [src]="details.sprites.front_shiny">
+        <img [src]="details.sprites.back_shiny">
         <ion-card-title class="ion-text-capitalize">#{{ details.id }} {{ details.name }} 
           <ion-chip color="warning" *ngFor="let t of details.types">
             <ion-label>{{ t.type.name }}</ion-label>

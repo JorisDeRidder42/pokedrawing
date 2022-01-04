@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import axios from 'axios';
 import { Observable } from 'rxjs';
 import { map, catchError, retry} from 'rxjs/operators';
+import { pokemon } from '../types/pokemon';
+import { pokemonApiResult } from '../types/pokemonApiResult';
 
 
 @Injectable({
@@ -26,15 +29,17 @@ export class ApicallService {
   getPokeImage(index){
      return `${this.imageUrl}${index}.png`;
   }
-  getPokeName(index){
-    return `${this.baseUrl}${index}`;
-  }
-
   //alle pokemon in de pokemon tab
-  getPokemon(offset = 0){
-    return this.http.get(`${this.baseUrl}?offset=${offset}&limit=25`,{
+  getPokemon(offset = 0, filter = ''): Observable <pokemonApiResult<pokemon>>{
+    return this.http
+    .get<pokemonApiResult<pokemon>>(
+      `${this.baseUrl}?offset=${offset}&limit=25`,{
       observe: 'body',
-      responseType: 'json'
+      responseType: 'json',
+      params: {
+        offset: 25,
+        name: `/^${filter}.*/i`
+      }
     })
     .pipe(
        // Handle any errors and return an alternative value
@@ -70,15 +75,12 @@ export class ApicallService {
    );
  }
   //toon de details van de pokemons
- getPokeDetails(index){
-   return this.http.get(`${this.baseUrl}${index}`).pipe(
+ getPokeDetails(nummerpokemon){
+   return this.http.get(`${this.baseUrl}${nummerpokemon}`).pipe(
      map(pokemon =>{
-       let sprites = Object.keys(pokemon['sprites']);
-       pokemon['images'] = sprites
-       .map(spriteKey => pokemon['sprites'] [spriteKey])
-       .filter(img => img);
        return pokemon
      })
    );
  }
+
 }
