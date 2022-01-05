@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import axios from 'axios';
-import * as firebase from 'firebase/compat';
 import { Observable } from 'rxjs';
 import { map, catchError, retry} from 'rxjs/operators';
 import { pokemon } from '../types/pokemon';
@@ -85,5 +84,6 @@ export class ApicallService {
        return pokemon
      })
    );
-  }
+ }
+
 }
