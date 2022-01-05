@@ -2,7 +2,6 @@ import { AfterViewInit, Component, Renderer2, ViewChild } from '@angular/core';
 import { AlertController, Platform} from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { ApicallService } from 'src/app/services/apicall.service';
-import { File } from '@awesome-cordova-plugins/file/ngx';
 
 @Component({
   selector: 'app-draw',
@@ -142,51 +141,19 @@ export class DrawPage implements AfterViewInit{
     this.restoreArray = [];
     this.indexArray -= 1;
   }
-  saveCanvasImage(){
-      var dataUrl = this.canvasElement.toDataURL();
-
-      //clear canvas after saving
-      let ctx = this.canvasElement.getContext('2d');
-      ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);   
-      //console.log(dataUrl);
-
-      let name = new Date().getTime + '.png';
-      // let path = this.file.dataDirectory;
-
-      // removes data:image/png;base64 from the string path file
-      // var data = dataUrl.split(',')[1];
-      // let blob = this.b64toBlob(data, 'image/png');
-
-      // this.file.writeFile(path, name, blob).then(res => {
-      // }, err => {
-      //   console.log('error: ', err);
-      // });
-      // console.log(data);
-      // to save the canvas as png image and navigate to the next page to show the saved image
+  async uploadToStorage() {
+    // let dataUrl = this.canvasElement.dataUrl();
+    // let file = '.png';
+    // const task = this.storage.upload(file, dataUrl);
+      
+    //     const userProfileRef = this.storage.ref(`gs://pokedrawing-98ac3.appspot.com/uploads/${task}${file}`);
+    //     userProfileRef.putString(file, 'base64').then(snapshot => {
+    //         console.log('snapShot',snapshot);
+    //     }).catch(error => {
+    //         console.log(error);
+    //     });
   }
-  // https://forum.ionicframework.com/t/save-base64-encoded-image-to-specific-filepath/96180/3
-  // b64toBlob(b64Data, contentType) {
-  //   contentType = contentType || '';
-  //   var sliceSize = 512;
-  //   var byteCharacters = atob(b64Data);
-  //   var byteArrays = [];
-   
-  //   for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-  //     var slice = byteCharacters.slice(offset, offset + sliceSize);
-   
-  //     var byteNumbers = new Array(slice.length);
-  //     for (var i = 0; i < slice.length; i++) {
-  //       byteNumbers[i] = slice.charCodeAt(i);
-  //     }
-   
-  //     var byteArray = new Uint8Array(byteNumbers);
-   
-  //     byteArrays.push(byteArray);
-  //   }
-   
-  //   var blob = new Blob(byteArrays, { type: contentType });
-  //   return blob;
-  // }
+      
    
   undoLast(){
     if (this.indexArray <= 0) {
