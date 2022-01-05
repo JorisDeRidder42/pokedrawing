@@ -12,7 +12,6 @@ export class RandomPage implements OnInit {
   afbeelding: string;
   indexnummerpokemon: number;
   gekniptelink: string;
-  pokemon1: any;
   
   ngOnInit(){
     this.LoadImagePokemon();
@@ -31,12 +30,6 @@ export class RandomPage implements OnInit {
   this.afbeelding = this.apiService.getPokeImage(b);
   //console.log(this.afbeelding);
   this.gekniptelink = this.afbeelding.substring(this.afbeelding.lastIndexOf("/") + 1,this.afbeelding.lastIndexOf("."));
-  this.getPokemonNameFromHome();
   }
 
-  async getPokemonNameFromHome(){
-    this.apiService.getPokemon1(this.gekniptelink).subscribe(res => {
-      this.pokemon1 = res;
-    }
-  )};
 }
