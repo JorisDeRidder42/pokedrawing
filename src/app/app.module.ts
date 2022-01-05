@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CanvasDrawComponent } from './canvas-draw/canvas-draw.component';
 import { CommonModule } from '@angular/common';
-
 @NgModule({
   declarations: [AppComponent, CanvasDrawComponent],
   entryComponents: [],
