@@ -3,6 +3,10 @@ import { AlertController, Platform} from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { ApicallService } from 'src/app/services/apicall.service';
 import { File } from '@awesome-cordova-plugins/file/ngx';
+import { Storage, ref } from '@angular/fire/storage';
+import {AngularFireStorage } from 'angularfire2/storage';
+import { Database } from '@angular/fire/database';
+import { RandomPage } from '../random/random.page';
 
 @Component({
   selector: 'app-draw',
@@ -26,10 +30,14 @@ export class DrawPage implements AfterViewInit{
   restoreArray = [];
   indexArray :number = -1;
 
+
+
   constructor(public platform: Platform,
                public renderer: Renderer2,
                public alertController: AlertController,
                public apiService: ApicallService,
+               public db: Database,
+               public storage: AngularFireStorage,
                public commonModule: CommonModule) {
                 }
   ngAfterViewInit(): void {
@@ -142,14 +150,19 @@ export class DrawPage implements AfterViewInit{
     this.restoreArray = [];
     this.indexArray -= 1;
   }
-  saveCanvasImage(){
-      var dataUrl = this.canvasElement.toDataURL();
-
-      //clear canvas after saving
-      let ctx = this.canvasElement.getContext('2d');
-      ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);   
-      //console.log(dataUrl);
-    }
+  async uploadToStorage() {
+    let dataUrl = this.canvasElement.dataUrl();
+    let file = '.png';
+    const task = this.storage.upload(file, dataUrl);
+      
+        const userProfileRef = this.storage.ref(`gs://pokedrawing-98ac3.appspot.com/uploads/${task}${file}`);
+        userProfileRef.putString(file, 'base64').then(snapshot => {
+            console.log('snapShot',snapshot);
+        }).catch(error => {
+            console.log(error);
+        });
+      }
+    
    
   undoLast(){
     if (this.indexArray <= 0) {
