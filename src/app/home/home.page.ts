@@ -12,16 +12,20 @@ export class HomePage {
   constructor(public route: ActivatedRoute, private apiService :ApicallService) {}
   afbeelding: string;
   nummerpokemon:number
-  index:number
-  name: string;
-  details:any;
+  moves:any;
+  pokemon1: any;
   
   ngOnInit(){
     this.LoadImagePokemon();
   }
   
   async LoadImagePokemon(){
-    this.afbeelding = this.apiService.getPokeImage(this.apiService.CreateRandomIndex());
-    console.log(this.afbeelding)
+    this.nummerpokemon = this.apiService.CreateRandomIndex();
+    this.afbeelding = this.apiService.getPokeImage(this.nummerpokemon);
+    this.apiService.getPokemon1(this.nummerpokemon).subscribe(res => {
+      this.pokemon1 = res;
+    });
+    //console.log(this.afbeelding)
+    //console.log(this.nummerpokemon)
   }
 }

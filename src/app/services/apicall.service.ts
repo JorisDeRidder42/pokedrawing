@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { Observable } from 'rxjs';
@@ -29,8 +29,8 @@ export class ApicallService {
   getPokeImage(index){
      return `${this.imageUrl}${index}.png`;
   }
-  getPokeName(nummerpokemon){
-    return `${this.baseUrl}${nummerpokemon}`;
+   getPokemon1(nummerpokemon){
+    return this.http.get(`${this.baseUrl}${nummerpokemon}`)
  }
   //alle pokemon in de pokemon tab
   getPokemon(offset = 0, filter = ''): Observable <pokemonApiResult<pokemon>>{

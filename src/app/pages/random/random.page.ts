@@ -11,17 +11,25 @@ export class RandomPage implements OnInit {
   constructor(public apiService: ApicallService) {}
   afbeelding: string;
   indexnummerpokemon: number;
+  gekniptelink: string;
   
   ngOnInit(){
     this.LoadImagePokemon();
   }
   async LoadImagePokemon(){
-    let b = localStorage.getItem("indexpokemon");
-  this.afbeelding = this.apiService.getPokeImage(b);
+    this.knipUrl();
   }
 
   randomPokemon(){
     this.afbeelding = this.apiService.getPokeImage(this.apiService.CreateRandomIndex());
+    this.knipUrl();
+  }
+
+  knipUrl(){
+  let b = localStorage.getItem("indexpokemon");
+  this.afbeelding = this.apiService.getPokeImage(b);
+  //console.log(this.afbeelding);
+  this.gekniptelink = this.afbeelding.substring(this.afbeelding.lastIndexOf("/") + 1,this.afbeelding.lastIndexOf("."));
   }
 
 }
