@@ -4,6 +4,7 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-searchbar id="searchbar" type="name" placeholder="Search pokemon" [value]="searchText" placeholder="Search"  debounce="500" (ionChange)="searchPokemon($event)"></ion-searchbar>
   <ion-content>
     <ion-list>
       <ion-item *ngFor="let poke of pokemon;" [routerLink]="poke.pokeIndex">
