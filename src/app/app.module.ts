@@ -13,6 +13,10 @@ import { CommonModule } from '@angular/common';
 import { environment } from '../environments/environment';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
+
+
 
 
 @NgModule({
@@ -22,8 +26,15 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
      IonicModule.forRoot(),
       AppRoutingModule, 
       HttpClientModule,
+      Base64ToGallery,
       CommonModule,
-      provideFirebaseApp(() => initializeApp(environment.firebaseConfig),provideFirestore(() => getFirestore()))],
+      provideFirebaseApp(() => initializeApp(environment.firebaseConfig),provideFirestore(() => getFirestore())),
+      ServiceWorkerModule.register('ngsw-worker.js', {
+        enabled: environment.production,
+        // Register the ServiceWorker as soon as the app is stable
+        // or after 30 seconds (whichever comes first).
+        registrationStrategy: 'registerWhenStable:30000'
+      })],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy,}],
   bootstrap: [AppComponent],
 })

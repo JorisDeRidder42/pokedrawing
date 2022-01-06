@@ -5,6 +5,9 @@ import { map, catchError, retry} from 'rxjs/operators';
 import { pokemon } from '../types/pokemon';
 import { pokemonApiResult } from '../types/pokemonApiResult';
 
+import {Capacitor} from '@capacitor/core';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +16,9 @@ export class ApicallService {
   maxGen1: number = 151;
   minGen1: number = 1;
   indexnummerpokemon: any;
+
+  drawing:any;
+
 
   baseUrl = 'https://pokeapi.co/api/v2/pokemon/';
   imageUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/';
@@ -84,5 +90,4 @@ export class ApicallService {
      })
    );
  }
-
 }
