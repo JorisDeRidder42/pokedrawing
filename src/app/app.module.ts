@@ -14,7 +14,6 @@ import { environment } from '../environments/environment';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
 
 
 
@@ -26,7 +25,6 @@ import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
      IonicModule.forRoot(),
       AppRoutingModule, 
       HttpClientModule,
-      Base64ToGallery,
       CommonModule,
       provideFirebaseApp(() => initializeApp(environment.firebaseConfig),provideFirestore(() => getFirestore())),
       ServiceWorkerModule.register('ngsw-worker.js', {

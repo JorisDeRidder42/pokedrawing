@@ -5,7 +5,7 @@ import { ApicallService } from 'src/app/services/apicall.service';
 import { HttpClient } from '@angular/common/http';
 
 import { FileSharer } from '@byteowls/capacitor-filesharer';
-import { Base64ToGallery, Base64ToGalleryOptions } from '@ionic-native/base64-to-gallery/ngx';
+//import { Base64ToGallery, Base64ToGalleryOptions } from '@ionic-native/base64-to-gallery/ngx';
 
 @Component({
   selector: 'app-draw',
@@ -34,7 +34,7 @@ export class DrawPage implements AfterViewInit{
                public renderer: Renderer2,
                public alertController: AlertController,
                public apiService: ApicallService,
-               public base64ToGallery: Base64ToGallery,
+  //             public base64ToGallery: Base64ToGallery,
                public toastCtrl: ToastController,
          public commonModule: CommonModule) {
                 }
@@ -51,14 +51,13 @@ export class DrawPage implements AfterViewInit{
   }
 
   async shareDrawing(){
-    let dataUrl = this.canvasElement.toDataURL();
+    this.dataUrl = this.canvasElement.toDataURL();
     let ctx = this.canvasElement.getContext('2d');
     ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
-    console.log(dataUrl);
-    let base64 = this.dataUrl.split('.')[1];
+    console.log(this.dataUrl);
+    let base64 = this.dataUrl.split(',')[1];
     console.log(base64);
     
-
         await FileSharer.share({
           filename: Math.random() +'drawing.png',
             base64Data: this.dataUrl,
@@ -177,39 +176,39 @@ export class DrawPage implements AfterViewInit{
     let ctx = this.canvasElement.getContext('2d');
     ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
 
-    if(this.platform.is('cordova')){
+    // if(this.platform.is('cordova')){
 
-    const options: Base64ToGalleryOptions = { prefix: 'canvas', mediaScanner: true};
+    // const options: Base64ToGalleryOptions = { prefix: 'canvas', mediaScanner: true};
 
-    // this.base64ToGallery.base64ToGallery(dataUrl, { prefix: '_img' }).then(
-    //   res => console.log('Saved image to gallery ', res),
-    //   err => console.log('Error saving image to gallery ', err)
+    // // this.base64ToGallery.base64ToGallery(dataUrl, { prefix: '_img' }).then(
+    // //   res => console.log('Saved image to gallery ', res),
+    // //   err => console.log('Error saving image to gallery ', err)
 
-      this.base64ToGallery.base64ToGallery(dataUrl, options).then(
-        async res => {
-          const toast = await this.toastCtrl.create({
-            message: 'Image saved to camera roll.',
-            duration: 2000
-          });
-          toast.present();
-          let ctx = this.canvasElement.getContext('2d');
-          ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
-          console.log(dataUrl);
-        },
-        err => console.log('Error saving image to gallery ', err)
-      );
-    }
-    else{
-      let data = dataUrl.split(',')[1];
-      let blob = this.b64toBlob(data,'image/png');
+    //   this.base64ToGallery.base64ToGallery(dataUrl, options).then(
+    //     async res => {
+    //       const toast = await this.toastCtrl.create({
+    //         message: 'Image saved to camera roll.',
+    //         duration: 2000
+    //       });
+    //       toast.present();
+    //       let ctx = this.canvasElement.getContext('2d');
+    //       ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+    //       console.log(dataUrl);
+    //     },
+    //     err => console.log('Error saving image to gallery ', err)
+    //   );
+    // }
+    // else{
+    //   let data = dataUrl.split(',')[1];
+    //   let blob = this.b64toBlob(data,'image/png');
 
-      var a = window.document.createElement('a');
-      a.href= window.URL.createObjectURL(blob);
-      a.download= 'canvasimage.png';
-      document.body.appendChild(a);
-        a.click()
-        document.body.removeChild(a);
-    }
+    //   var a = window.document.createElement('a');
+    //   a.href= window.URL.createObjectURL(blob);
+    //   a.download= 'canvasimage.png';
+    //   document.body.appendChild(a);
+    //     a.click()
+    //     document.body.removeChild(a);
+    // }
   }
 
   // https://forum.ionicframework.com/t/save-base64-encoded-image-to-specific-filepath/96180/3
