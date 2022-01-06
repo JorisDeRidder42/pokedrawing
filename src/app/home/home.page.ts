@@ -9,10 +9,9 @@ import { ApicallService } from '../services/apicall.service';
 })
 export class HomePage {
 
-  constructor(public route: ActivatedRoute, private apiService :ApicallService) {}
+  constructor(public route: ActivatedRoute, private apiService :ApicallService,) {}
   afbeelding: string;
   nummerpokemon:number
-  moves:any;
   pokemon1: any;
   
   ngOnInit(){
@@ -20,8 +19,11 @@ export class HomePage {
   }
   
   async LoadImagePokemon(){
+    //genereert random nummer van 1 - 151
     this.nummerpokemon = this.apiService.CreateRandomIndex();
+    //toon afbeelding met de id van CreateRandomIndex
     this.afbeelding = this.apiService.getPokeImage(this.nummerpokemon);
+    //haalt het object op met de id van hierboven zodat de naam kan getoond worden
     this.apiService.getPokemon1(this.nummerpokemon).subscribe(res => {
       this.pokemon1 = res;
     });

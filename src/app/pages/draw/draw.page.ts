@@ -14,7 +14,6 @@ export class DrawPage implements AfterViewInit{
   //de punten waar de user tekent
   PositionX: number;
   PositionY: number;
-
   drawing = false;
 
   selectedColor: string = '#459cde';
@@ -35,13 +34,13 @@ export class DrawPage implements AfterViewInit{
     this.canvasElement = this.canvas.nativeElement;
     this.canvasElement.width = this.platform.width() + '';
     this.canvasElement.height = 600;
-
-   this.LoadImagePokemon();
+    this.LoadImagePokemon();
   }
+  //laad pokemonimage via random index
   async LoadImagePokemon(){
   let b = localStorage.getItem("indexpokemon");
   this.afbeelding = this.apiService.getPokeImage(b);
-}
+  }
 
 
   startDrawing(event){
@@ -141,20 +140,18 @@ export class DrawPage implements AfterViewInit{
     this.restoreArray = [];
     this.indexArray -= 1;
   }
-  async uploadToStorage() {
-    // let dataUrl = this.canvasElement.dataUrl();
-    // let file = '.png';
-    // const task = this.storage.upload(file, dataUrl);
-      
-    //     const userProfileRef = this.storage.ref(`gs://pokedrawing-98ac3.appspot.com/uploads/${task}${file}`);
-    //     userProfileRef.putString(file, 'base64').then(snapshot => {
-    //         console.log('snapShot',snapshot);
-    //     }).catch(error => {
-    //         console.log(error);
-    //     });
+
+  uploadToStorage(){
+    let dataUrl = this.canvasElement.toDataURL();
+
+    let ctx = this.canvasElement.getContext('2d');
+    ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+
+    let name = new Date().getTime() + ' .png';
+    console.log(name);
+    console.log(dataUrl);
   }
-      
-   
+
   undoLast(){
     if (this.indexArray <= 0) {
       this.clearCanvas();

@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   firebaseConfig :{
   apiKey: "AIzaSyA5N2Z5ArwjHYIC2dLdWEUTCJdq3HePDRc",
   authDomain: "pokedrawing-98ac3.firebaseapp.com",
