@@ -19,7 +19,7 @@ export class PokemonPage {
   ngOnInit(){
     this.loadPokemon();
   }
-  
+  //https://devdactic.com/ionic-4-pokedex-search-scroll/
   loadPokemon(loadMore=false, event?){
     //als loadmore wordt opgeroepen dan + 25 pokemon geladen
     if(loadMore){

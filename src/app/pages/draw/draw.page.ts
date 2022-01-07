@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { ApicallService } from 'src/app/services/apicall.service';
 import { FileSharer } from '@byteowls/capacitor-filesharer';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
-import { Storage, FirebaseStorage } from '@angular/fire/storage';
 
 
 @Component({
@@ -19,17 +18,12 @@ export class DrawPage implements AfterViewInit{
   PositionX: number;
   PositionY: number;
   drawing = false;
-  path: string;
-  imageDrawing: string;
   selectedColor: string = '#459cde';
   colors = [ '#9e2956', '#c2281d', '#de722f', '#edbf4c', '#5db37e', '#459cde', '#4250ad', '#802fa3', '#ffffff' ];
   lineWidth: number = 10;
-  afbeelding: string;
-  indexnummerpokemon: number;
   restoreArray = [];
   indexArray :number = -1;
   dataUrl:string;
-  storage:string;
   constructor(public platform: Platform,
                public renderer: Renderer2,
                public alertController: AlertController,
@@ -42,14 +36,9 @@ export class DrawPage implements AfterViewInit{
     this.canvasElement = this.canvas.nativeElement;
     this.canvasElement.width = this.platform.width() + '';
     this.canvasElement.height = 600;
-    this.LoadImagePokemon();
-  }
-  //laad pokemonimage via random index
-  async LoadImagePokemon(){
-  let b = localStorage.getItem("indexpokemon");
-  this.afbeelding = this.apiService.getPokeImage(b);
   }
 
+  //share drawing on mobile - on browser it downloads the file
   async shareDrawing(){
     this.dataUrl = this.canvasElement.toDataURL();
     let ctx = this.canvasElement.getContext('2d');
@@ -69,7 +58,7 @@ export class DrawPage implements AfterViewInit{
             console.error("File sharing failed:", error.message);
         });
   }
-
+  //www.joshmorony.com/creating-a-drawing-application-in-ionic/
   startDrawing(event){
     this.drawing = true;
     let canvasPositie = this.canvasElement.getBoundingClientRect();
@@ -88,7 +77,7 @@ export class DrawPage implements AfterViewInit{
     this.teken(currentX, currentY)
 
   }
-
+  //mobile support
   handleMoved(event){
     let currentX = event.touches[0].pageX;
     let currentY = event.touches[0].pageY;
@@ -103,6 +92,7 @@ export class DrawPage implements AfterViewInit{
     //console.log(this.restoreArray);
   }
 
+  //alert voor canvas leeg te maken
   async presentAlert(){
     const alert = await this.alertController.create({
       header: 'Clear canvas',
@@ -127,11 +117,21 @@ export class DrawPage implements AfterViewInit{
     await alert.onDidDismiss();
   }
 
-  selectColor(color){
-    this.selectedColor = color;
-    //console.log(color);
+  //maak canvas leeg
+  clearCanvas(){
+    let ctx = this.canvasElement.getContext('2d');
+    ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+    //Restore the array length
+    this.restoreArray = [];
+    this.indexArray -= 1;
   }
 
+  //kleur selecteren
+  selectColor(color){
+    this.selectedColor = color;
+  }
+
+  //brushsize
   changeSize(size){
     this.lineWidth = size
   }
@@ -159,34 +159,14 @@ export class DrawPage implements AfterViewInit{
       this.PositionX = currentX;
       this.PositionY = currentY;
   }
-  //maak canvas leeg
-  clearCanvas(){
-    let ctx = this.canvasElement.getContext('2d');
-    ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
-    //Restore the array length
-    this.restoreArray = [];
-    this.indexArray -= 1;
-  }
 
-  async storeDrawing(location){
-      let dataUrl = this.canvasElement.toDataURL();
-      let res = location.putString(dataUrl, 'data');
-      console.log(res);
-      // const file = dataUrl.split(',')[1];
-      //  const metadata = {
-      //     contentType: 'image/png',
-      //  };
-      //  const n = Date.now();
-      //  const userProfileRef = this.storage.ref()
-      //  //(`gs://pokedrawing-98ac3.appspot.com/drawings/${n}.png`);
+  //opslaan van de base64 string (niet gelukt)
+  async saveDrawing(){
+    let dataUrl = this.canvasElement.toDataURL();
+    console.log(dataUrl);
+   }
 
-      //  userProfileRef.putString(file, 'base64', metadata).then(snapshot => {
-      //     console.log('snapShot', snapshot);
-      //  }).catch(error => {
-      //     console.log(error);
-      //  });
-    }
-
+  //www.youtube.com/watch?v=wCwKkT1P7vY&t=3s&ab_channel=BananaCoding
   undoLast(){
     if (this.indexArray <= 0) {
       this.clearCanvas();
@@ -199,5 +179,4 @@ export class DrawPage implements AfterViewInit{
       //console.log(this.indexArray);
     }
   }
-  
 }

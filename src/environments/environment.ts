@@ -13,6 +13,3 @@ export const environment = {
   appId: "1:297858092039:web:7dd4e67f3b796016586ea2"
   }
 };
-const firebaseApp = initializeApp(environment.firebaseConfig);
-
-const storage = getStorage(firebaseApp);

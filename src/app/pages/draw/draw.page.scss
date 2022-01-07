@@ -1,14 +1,13 @@
+//anders zie je de canvas niet
 canvas{
     background: #f2f2f2 !important;
-    z-index:-100;
     display: block;
 }
-.color-block{
-    height: 2em;
-}
+/*anders staan de buttons onder de header */
 .buttons{
     margin-top: 3em;
 }
+//ziet er beter uit
 .colorpicker{
     margin-top: 0.5em;
 }
