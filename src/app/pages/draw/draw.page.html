@@ -22,7 +22,7 @@
         <ion-icon slot="end" name="brush"></ion-icon>
         <p> Value: {{lineWidth}}</p>
       </ion-range>
-      <ion-button expand="full" (click)="uploadToStorage()">
+      <ion-button expand="full" (click)="storeDrawing(dataUrl)">
         <ion-icon slot="start" name="download"></ion-icon>
       </ion-button>
       <ion-button expand="full" (click)="shareDrawing()">

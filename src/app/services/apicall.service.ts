@@ -6,7 +6,9 @@ import { pokemon } from '../types/pokemon';
 import { pokemonApiResult } from '../types/pokemonApiResult';
 
 import {Capacitor} from '@capacitor/core';
+import { addDoc } from 'firebase/firestore';
 
+ 
 
 
 @Injectable({
@@ -24,6 +26,7 @@ export class ApicallService {
   imageUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/';
 
   constructor(public http: HttpClient) { }
+
 
   CreateRandomIndex(){
     let nummerpokemon = Math.floor(Math.random() * this.maxGen1) + this.minGen1

@@ -12,11 +12,9 @@ import { CommonModule } from '@angular/common';
 
 import { environment } from '../environments/environment';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { enableIndexedDbPersistence, getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { ServiceWorkerModule } from '@angular/service-worker';
-
-
-
+import { Storage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [AppComponent, CanvasDrawComponent],
@@ -26,7 +24,15 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       AppRoutingModule, 
       HttpClientModule,
       CommonModule,
-      provideFirebaseApp(() => initializeApp(environment.firebaseConfig),provideFirestore(() => getFirestore())),
+      // Firebase main import.
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    // Firestore database import
+    provideFirestore(() => {
+      const firestore = getFirestore();
+      // Enable offline persistence.
+      enableIndexedDbPersistence(firestore);
+      return firestore;
+    }),
       ServiceWorkerModule.register('ngsw-worker.js', {
         enabled: environment.production,
         // Register the ServiceWorker as soon as the app is stable

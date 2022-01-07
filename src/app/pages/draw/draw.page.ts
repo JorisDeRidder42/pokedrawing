@@ -2,9 +2,10 @@ import { AfterViewInit, Component, Renderer2, ViewChild } from '@angular/core';
 import { AlertController, Platform, ModalController, ToastController} from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { ApicallService } from 'src/app/services/apicall.service';
-import { HttpClient } from '@angular/common/http';
-
 import { FileSharer } from '@byteowls/capacitor-filesharer';
+import { Firestore, collectionData, collection } from '@angular/fire/firestore';
+import { Storage, FirebaseStorage } from '@angular/fire/storage';
+
 
 @Component({
   selector: 'app-draw',
@@ -18,8 +19,8 @@ export class DrawPage implements AfterViewInit{
   PositionX: number;
   PositionY: number;
   drawing = false;
-  sliceSize:number;
-
+  path: string;
+  imageDrawing: string;
   selectedColor: string = '#459cde';
   colors = [ '#9e2956', '#c2281d', '#de722f', '#edbf4c', '#5db37e', '#459cde', '#4250ad', '#802fa3', '#ffffff' ];
   lineWidth: number = 10;
@@ -28,12 +29,12 @@ export class DrawPage implements AfterViewInit{
   restoreArray = [];
   indexArray :number = -1;
   dataUrl:string;
-
+  storage:string;
   constructor(public platform: Platform,
                public renderer: Renderer2,
                public alertController: AlertController,
                public apiService: ApicallService,
-  //             public base64ToGallery: Base64ToGallery,
+               public fireStore: Firestore,
                public toastCtrl: ToastController,
          public commonModule: CommonModule) {
                 }
@@ -167,72 +168,24 @@ export class DrawPage implements AfterViewInit{
     this.indexArray -= 1;
   }
 
-  uploadToStorage(){
-    let dataUrl = this.canvasElement.toDataURL();
-    console.log('drawing: ',dataUrl);
+  async storeDrawing(location){
+      let dataUrl = this.canvasElement.toDataURL();
+      let res = location.putString(dataUrl, 'data');
+      console.log(res);
+      // const file = dataUrl.split(',')[1];
+      //  const metadata = {
+      //     contentType: 'image/png',
+      //  };
+      //  const n = Date.now();
+      //  const userProfileRef = this.storage.ref()
+      //  //(`gs://pokedrawing-98ac3.appspot.com/drawings/${n}.png`);
 
-    //clearcanvas
-    let ctx = this.canvasElement.getContext('2d');
-    ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
-
-    // if(this.platform.is('cordova')){
-
-    // const options: Base64ToGalleryOptions = { prefix: 'canvas', mediaScanner: true};
-
-    // // this.base64ToGallery.base64ToGallery(dataUrl, { prefix: '_img' }).then(
-    // //   res => console.log('Saved image to gallery ', res),
-    // //   err => console.log('Error saving image to gallery ', err)
-
-    //   this.base64ToGallery.base64ToGallery(dataUrl, options).then(
-    //     async res => {
-    //       const toast = await this.toastCtrl.create({
-    //         message: 'Image saved to camera roll.',
-    //         duration: 2000
-    //       });
-    //       toast.present();
-    //       let ctx = this.canvasElement.getContext('2d');
-    //       ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
-    //       console.log(dataUrl);
-    //     },
-    //     err => console.log('Error saving image to gallery ', err)
-    //   );
-    // }
-    // else{
-    //   let data = dataUrl.split(',')[1];
-    //   let blob = this.b64toBlob(data,'image/png');
-
-    //   var a = window.document.createElement('a');
-    //   a.href= window.URL.createObjectURL(blob);
-    //   a.download= 'canvasimage.png';
-    //   document.body.appendChild(a);
-    //     a.click()
-    //     document.body.removeChild(a);
-    // }
-  }
-
-  // https://forum.ionicframework.com/t/save-base64-encoded-image-to-specific-filepath/96180/3
-    b64toBlob(b64Data, contentType) {
-    contentType = contentType || '';
-    var sliceSize = 512;
-    var byteCharacters = atob(b64Data);
-    var byteArrays = [];
-  
-    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-      var slice = byteCharacters.slice(offset, offset + sliceSize);
-  
-      var byteNumbers = new Array(slice.length);
-      for (var i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
-      }
-  
-      var byteArray = new Uint8Array(byteNumbers);
-  
-      byteArrays.push(byteArray);
+      //  userProfileRef.putString(file, 'base64', metadata).then(snapshot => {
+      //     console.log('snapShot', snapshot);
+      //  }).catch(error => {
+      //     console.log(error);
+      //  });
     }
-  
-    var blob = new Blob(byteArrays, { type: contentType });
-    return blob;
-  }
 
   undoLast(){
     if (this.indexArray <= 0) {
@@ -243,7 +196,7 @@ export class DrawPage implements AfterViewInit{
       this.restoreArray.pop();
       let ctx = this.canvasElement.getContext('2d');
       ctx.putImageData(this.restoreArray[this.indexArray], 0, 0);
-      console.log('1',this.indexArray);
+      //console.log(this.indexArray);
     }
   }
   
