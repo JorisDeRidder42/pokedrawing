@@ -22,6 +22,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
   declarations: [AppComponent, CanvasDrawComponent],
   entryComponents: [],
   imports: [BrowserModule,
+
      IonicModule.forRoot(),
       AppRoutingModule, 
       HttpClientModule,
