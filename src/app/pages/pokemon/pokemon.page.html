@@ -1,25 +1,25 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      Pokédex
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <!-- <ion-searchbar placeholder="Search pokemon" debounce="500"></ion-searchbar>
+<ion-searchbar id="searchbar" type="name" placeholder="Search pokemon" [value]="searchText" placeholder="Search"  debounce="500" (ionChange)="searchPokemon($event)"></ion-searchbar>
+  <ion-content>
     <ion-list>
-      <ion-item>
+      <ion-item *ngFor="let poke of pokemon;" [routerLink]="poke.pokeIndex">
         <ion-avatar slot="start">
-          <img [src]="poke.image" style="background:#f2f2f2;"/>
+          <img [src]="poke.image" style="background:#f2f2f2;" *ngIf="poke.image != 'null'">
         </ion-avatar>
         <ion-label class="ion-text-capitalize">
           <h2>{{poke.name}}</h2>
-          <p>#{{poke.pokeIndex}}</p>
+          <h6>#{{poke.pokeIndex}}</h6>                                                                           
         </ion-label>
       </ion-item>
     </ion-list>
-<ion-infinite-scroll>
+    
+    <ion-infinite-scroll (ionInfinite)="loadPokemon(true, $event)">
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more pokemon...">
       </ion-infinite-scroll-content>
-      </ion-infinite-scroll> -->
+      </ion-infinite-scroll>
 </ion-content>

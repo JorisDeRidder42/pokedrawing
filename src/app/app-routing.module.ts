@@ -24,11 +24,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule)
   },
   {
-    path: 'drawings',
-    loadChildren: () => import('./pages/drawings/drawings.module').then( m => m.DrawingsPageModule)
+    path: 'random',
+    loadChildren: () => import('./pages/random/random.module').then( m => m.RandomPageModule)
+  },
+  {
+    path: 'home/pokemon/:index',
+    loadChildren: () => import('./details/details.module').then( m => m.DetailsPageModule)
   },
 ];
-
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })

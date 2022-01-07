@@ -1,23 +1,32 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>
-      Ionic Canvas Drawing
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
- 
+<ion-fab class="buttons" vertical="top" horizontal="start" slot="false">
+  <ion-fab-button (click)="presentAlert()">
+    <ion-icon name="trash"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+<ion-fab class="buttons" vertical="top" horizontal="end" slot="false">
+  <ion-fab-button (click)="undoLast()">
+    <ion-icon name="arrow-undo"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+<canvas #myCanvas
+(touchstart)="startDrawing($event)" (touchmove)="handleMoved($event)" (touchend)="endDrawing()"
+(mousedown)="startDrawing($event)" (mousemove)="moved($event)" (mouseup)="endDrawing()">
+</canvas>
 <ion-content scroll-y="false">
-    <canvas #myCanvas
-      (touchstart)="startDrawing($event)" (touchmove)="handleMoved($event)" (touchend)="endDrawing()"
-      (mousedown)="startDrawing($event)" (mousemove)="moved($event)" (mouseup)="endDrawing()">
-      </canvas>
-        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-          <ion-fab-button (click)="presentAlert()">
-            <ion-icon name="trash"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
+  <ion-row>
+    <ion-col>
+      <input type="color" [(ngModel)]="selectedColor" class="colorpicker">
+    </ion-col>
+      <ion-range [(ngModel)]="lineWidth" pin="true" min="1" max="100" step="1" color="primary">
+        <ion-icon size="small" slot="start" name="brush"></ion-icon>
+        <ion-icon slot="end" name="brush"></ion-icon>
+        <p> Value: {{lineWidth}}</p>
+      </ion-range>
+      <ion-button expand="full" (click)="saveDrawing()">
+        <ion-icon slot="start" name="download"></ion-icon>
+      </ion-button>
+      <ion-button expand="full" (click)="shareDrawing()">
+        <ion-icon slot="start" name="share-social"></ion-icon>
+      </ion-button>
+  </ion-row>
 </ion-content>
-<ion-range min="1" max="100" color="color" [(ngModel)]="brushSize">
-  <ion-icon size="small" slot="start" name="brush"></ion-icon>
-  <ion-icon slot="end" name="brush"></ion-icon>
-</ion-range>

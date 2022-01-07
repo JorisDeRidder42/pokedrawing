@@ -2,12 +2,9 @@
   margin:20px;
 }
 .poke-content {
-  margin: 0px auto;
-  padding:0;
   width: 100%;
-  height: 100%;
-  display: flex; /* Magic begins */
-  flex-direction: column;
-  justify-content: center; /* Center in main axis */
-  align-items: center; /* Center in cross axis */
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

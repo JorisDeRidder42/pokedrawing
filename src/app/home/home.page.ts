@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ApicallService } from '../services/apicall.service';
 
 @Component({
@@ -8,15 +9,25 @@ import { ApicallService } from '../services/apicall.service';
 })
 export class HomePage {
 
-  constructor(public apiService: ApicallService) {}
+  constructor(public route: ActivatedRoute, private apiService :ApicallService,) {}
   afbeelding: string;
+  nummerpokemon:number
+  pokemon1: any;
   
-  ngOnInit(index){
-    this.LoadImagePokemon(index);
-    //console.log('afbeeldingpad', this.afbeelding, this.pokenaam);
+  ngOnInit(){
+    this.LoadImagePokemon();
   }
   
-  async LoadImagePokemon(index){
-    this.afbeelding = this.apiService.getPokeImage(this.apiService.CreateRandomIndex());
+  async LoadImagePokemon(){
+    //genereert random nummer van 1 - 151
+    this.nummerpokemon = this.apiService.CreateRandomIndex();
+    //toon afbeelding met de id van CreateRandomIndex
+    this.afbeelding = this.apiService.getPokeImage(this.nummerpokemon);
+    //haalt het object op met de id van hierboven zodat de naam kan getoond worden
+    this.apiService.getPokemon1(this.nummerpokemon).subscribe(res => {
+      this.pokemon1 = res;
+    });
+    //console.log(this.afbeelding)
+    //console.log(this.nummerpokemon)
   }
 }

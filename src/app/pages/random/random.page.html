@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+     Pokédrawing
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-fab class="buttons" vertical="bottom" horizontal="end" slot="false">
+  <ion-fab-button color="warning" (click)="randomPokemon()">
+    <ion-icon name="dice"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+<ion-content [fullscreen]="true" scroll-y="false">
+  <ion-col class="ion-text-center">
+    <h4>#{{gekniptelink}} {{ pokemon1?.name }}</h4>
+  <div class="poke-content">
+    <img id="poke-afbeelding" [src]="afbeelding" alt="pokemon-img">
+  </div>
+  </ion-col>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="draw">
+          <ion-icon name="pencil"></ion-icon>
+          <ion-label>Draw</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="pokemon">
+          <ion-icon name="person-circle"></ion-icon>
+          <ion-label>Pokémon</ion-label>
+        </ion-tab-button>
+    
+        <ion-tab-button tab="random">
+          <ion-icon name="dice"></ion-icon>
+          <ion-label>Random</ion-label>
+        </ion-tab-button>
+    
+        <ion-tab-button tab="about">
+          <ion-icon name="information-circle"></ion-icon>
+          <ion-label>About</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+</ion-content>

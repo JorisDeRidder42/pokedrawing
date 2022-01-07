@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "297858092039",
+    "project_id": "pokedrawing-98ac3",
+    "storage_bucket": "pokedrawing-98ac3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297858092039:android:f1c83fb596b8cbf0586ea2",
+        "android_client_info": {
+          "package_name": "be.thomasmore.graduaten.pokedraw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297858092039-2l0aof0gci2gl0rjp8b934egvg5k8qc1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "be.thomasmore.graduaten.pokedraw",
+            "certificate_hash": "93a34339099e9c751f73c564b0b7c63901d026fb"
+          }
+        },
+        {
+          "client_id": "297858092039-fb189vqq3t0lsd72o01rck7m1bchom4a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1QonYtZXJv1fSD_h9GEP224JwJTLDhFo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297858092039-fb189vqq3t0lsd72o01rck7m1bchom4a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
