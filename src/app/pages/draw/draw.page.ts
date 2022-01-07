@@ -5,7 +5,6 @@ import { ApicallService } from 'src/app/services/apicall.service';
 import { HttpClient } from '@angular/common/http';
 
 import { FileSharer } from '@byteowls/capacitor-filesharer';
-//import { Base64ToGallery, Base64ToGalleryOptions } from '@ionic-native/base64-to-gallery/ngx';
 
 @Component({
   selector: 'app-draw',
@@ -60,7 +59,7 @@ export class DrawPage implements AfterViewInit{
     
         await FileSharer.share({
           filename: Math.random() +'drawing.png',
-            base64Data: this.dataUrl,
+            base64Data: base64,
             contentType: 'image/png'
           }).then(() => {
             let ctx = this.canvasElement.getContext('2d');
