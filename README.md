@@ -14,8 +14,8 @@ PokeDrawing is an app created for artists who enjoy drawing random Pokémon usin
 
 - **Frontend:** Built using Angular and typescript for a dynamic and interactive user interface.
 - **Data Fetching:** Utilizes Pokémon API to fetch and display Generation 1 Pokémon data.
-- **Mobile Optimization:** Responsive design using Bootstrap or Tailwind CSS for a seamless mobile drawing experience.
-- **Deployment:** Deployed using Firebase or another suitable hosting platform for accessibility.
+- **Mobile Optimization:** Responsive design using Bootstrap for a seamless mobile drawing experience.
+- **Deployment:** Deployed using Firebase hosting platform for accessibility.
 
 ## Installation and Usage
 
